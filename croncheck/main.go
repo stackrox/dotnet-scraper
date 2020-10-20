@@ -77,7 +77,8 @@ func main() {
 		}
 
 		for _, issue := range issues {
-			if !strings.HasPrefix(issue.GetTitle(), "Microsoft Security Advisory") {
+			title := strings.TrimSpace(issue.GetTitle())
+			if !strings.HasPrefix(title, "Microsoft Security Advisory") {
 				continue
 			}
 			link := strings.ReplaceAll(issue.GetURL(), "api.github.com/repos", "github.com")
