@@ -4,22 +4,23 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"github.com/google/go-github/v32/github"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
 	"github.com/ghodss/yaml"
+	"github.com/google/go-github/v32/github"
 )
 
 type affectedPackage struct {
-	Name string `json:"name"`
+	Name        string   `json:"name"`
 	Constraints []string `json:"constraints"`
 }
 
 type fileFormat struct {
-	ID string `json:"id"`
-	Link string `json:"link"`
+	ID               string            `json:"id"`
+	Link             string            `json:"link"`
 	AffectedPackages []affectedPackage `json:"affectedPackages"`
 }
 
@@ -28,17 +29,16 @@ type repo struct {
 }
 
 var (
-	reposToScrape = []repo {
-	{
-		owner: "dotnet",
-		name: "announcements",
-	},
-	{
-		owner: "aspnet",
-		name: "Announcements",
-	},
-}
-
+	reposToScrape = []repo{
+		{
+			owner: "dotnet",
+			name:  "announcements",
+		},
+		{
+			owner: "aspnet",
+			name:  "Announcements",
+		},
+	}
 )
 
 func prompt(p string) string {
@@ -85,8 +85,8 @@ func main() {
 
 	issueLink := make(map[string]struct{})
 	for _, repo := range reposToScrape {
-		issues, _, err := client.Issues.ListByRepo(context.Background(), repo.owner, repo.name,  &github.IssueListByRepoOptions{
-			Labels:      []string{"security"},
+		issues, _, err := client.Issues.ListByRepo(context.Background(), repo.owner, repo.name, &github.IssueListByRepoOptions{
+			Labels: []string{"security"},
 			ListOptions: github.ListOptions{
 				Page:    0,
 				PerPage: 500,
@@ -97,9 +97,9 @@ func main() {
 		}
 
 		for _, issue := range issues {
-				if !strings.HasPrefix(issue.GetTitle(), "Microsoft Security Advisory") {
-					continue
-				}
+			if !strings.HasPrefix(issue.GetTitle(), "Microsoft Security Advisory") {
+				continue
+			}
 			link := strings.ReplaceAll(issue.GetURL(), "api.github.com/repos", "github.com")
 			issueLink[link] = struct{}{}
 		}
@@ -162,4 +162,3 @@ func main() {
 		fmt.Println(l)
 	}
 }
-
