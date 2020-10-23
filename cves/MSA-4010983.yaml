@@ -1,6 +1,8 @@
 affectedPackages:
-- constraints:
-  - 1.1.0
-  name: Microsoft.AspNetCore.Mvc.Core
+- cpe23Uri: |
+    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Core:*:*:*:*:*:*:*:*
+  versionEndExcluding: 1.1.1
+  versionStartIncluding: 1.1.0
+  vulnerable: true
 id: MSA-4010983
 link: https://github.com/aspnet/Announcements/issues/216

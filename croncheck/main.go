@@ -9,9 +9,8 @@ import (
 	"strings"
 
 	"github.com/ghodss/yaml"
-	"github.com/stackrox/dotnet-scraper/types"
-
 	"github.com/google/go-github/v32/github"
+	"github.com/stackrox/dotnet-scraper/types"
 )
 
 type repoReference struct {
@@ -43,6 +42,10 @@ var knownMissingLinks = []string{
 	// Duplicate
 	"https://github.com/dotnet/announcements/issues/162",
 
+	// Microsoft Security Advisory CVE-2018-8409: .NET Core Denial Of Service Vulnerability
+	// Duplicate
+	"https://github.com/dotnet/announcements/issues/83",
+
 	// Microsoft Security Advisory CVE-2019-0815: ASP.NET Core denial of service vulnerability
 	// Strange module
 	"https://github.com/aspnet/Announcements/issues/352",
@@ -58,6 +61,10 @@ var knownMissingLinks = []string{
 	// Microsoft Security Advisory CVE-2018-0808: ASP.NET Core Denial Of Service Vulnerability
 	// IIS vuln
 	"https://github.com/aspnet/Announcements/issues/294",
+
+	// Microsoft Security Advisory CVE-2019-0548: ASP.NET Core Denial Of Service Vulnerability
+	// IIS vuln
+	"https://github.com/aspnet/Announcements/issues/335",
 }
 
 func main() {
