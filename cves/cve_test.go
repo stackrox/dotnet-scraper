@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"testing"
 
@@ -97,40 +96,19 @@ func TestYAMLRewrite(t *testing.T) {
 		newFormat.ID = off.ID
 		newFormat.Link = off.Link
 
-		cpeFraming := "cpe:2.3:a:microsoft:%s:*:*:*:*:*:*:*:*"
+		//cpeFraming := "cpe:2.3:a:microsoft:%s:*:*:*:*:*:*:*:*"
 
 		fmt.Println(off.ID)
 		var updated bool
 		for _, pkg := range off.AffectedPackages {
-			if pkg.VersionEndExcluding == "" {
+			if strings.HasSuffix(pkg.Cpe23Uri, "\n") {
 				updated = true
-				cpeSplit := strings.Split(pkg.Cpe23Uri, ":")
-				pkg := cpeSplit[4]
-				starts := cpeSplit[5]
-				ends := cpeSplit[5]
-
-				idx := strings.LastIndex(ends, ".")
-				lastNumeric, err := strconv.Atoi(ends[idx+1:])
-				if err != nil {
-					panic(err)
-				}
-				lastNumeric++
-				ends = ends[:idx+1] + strconv.Itoa(lastNumeric)
-				//fmt.Printf(cpeFraming+"\n", pkg.Name, "*")
-				//fmt.Printf("starts: %s\n", starts)
-				//fmt.Printf("ends excluding: %s\n", ends)
-
-				newFormat.AffectedPackages = append(newFormat.AffectedPackages, &schema.NVDCVEFeedJSON10DefCPEMatch{
-					Cpe23Uri:              fmt.Sprintf(cpeFraming+"\n", pkg),
-					Vulnerable:            true,
-					VersionStartIncluding: starts,
-					VersionEndExcluding:   ends,
-				})
+				pkg.Cpe23Uri = strings.TrimSuffix(pkg.Cpe23Uri, "\n")
 			}
 		}
 
 		if updated {
-			newBytes, err := yaml.Marshal(&newFormat)
+			newBytes, err := yaml.Marshal(&off)
 			if err != nil {
 				panic(err)
 			}

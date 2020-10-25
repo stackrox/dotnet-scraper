@@ -1,71 +1,57 @@
 affectedPackages:
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Abstractions:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Abstractions:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.ApiExplorer:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.ApiExplorer:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Core:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Core:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Cors:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Cors:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.DataAnnotations:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.DataAnnotations:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Formatters.Json:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Formatters.Json:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Formatters.Xml:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Formatters.Xml:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Localization:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Localization:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Razor:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Razor:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Razor.Host:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Razor.Host:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.TagHelpers:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.TagHelpers:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.ViewFeatures:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.ViewFeatures:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
-- cpe23Uri: |
-    cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.WebApiCompatShim:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.WebApiCompatShim:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.0.1
   versionStartIncluding: 1.0.0
   vulnerable: true
