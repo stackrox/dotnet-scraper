@@ -1,5 +1,5 @@
 affectedPackages:
-- cpe23Uri: cpe:2.3:a:microsoft:Microsoft.AspNetCore.Mvc.Core:*:*:*:*:*:*:*:*
+- cpe23Uri: cpe:2.3:a:microsoft:microsoft.aspnetcore.mvc.core:*:*:*:*:*:*:*:*
   versionEndExcluding: 1.1.1
   versionStartIncluding: 1.1.0
   vulnerable: true

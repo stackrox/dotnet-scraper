@@ -99,15 +99,10 @@ func TestYAMLRewrite(t *testing.T) {
 		//cpeFraming := "cpe:2.3:a:microsoft:%s:*:*:*:*:*:*:*:*"
 
 		fmt.Println(off.ID)
-		var updated bool
 		for _, pkg := range off.AffectedPackages {
-			if strings.HasSuffix(pkg.Cpe23Uri, "\n") {
-				updated = true
-				pkg.Cpe23Uri = strings.TrimSuffix(pkg.Cpe23Uri, "\n")
-			}
+			pkg.Cpe23Uri = strings.ToLower(pkg.Cpe23Uri)
 		}
 
-		if updated {
 			newBytes, err := yaml.Marshal(&off)
 			if err != nil {
 				panic(err)
@@ -115,7 +110,6 @@ func TestYAMLRewrite(t *testing.T) {
 			if err := ioutil.WriteFile(f.Name(), newBytes, 0777); err != nil {
 				panic(err)
 			}
-		}
 
 		fmt.Println()
 
