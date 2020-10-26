@@ -17,6 +17,10 @@ type repoReference struct {
 	owner, name string
 }
 
+const (
+	pageSize = 20
+)
+
 var repos = []repoReference{
 	{
 		owner: "dotnet",
@@ -29,42 +33,38 @@ var repos = []repoReference{
 }
 
 var knownMissingLinks = []string{
+	// ASP.NET Announcement Repo
+
 	// Microsoft Security Advisory: iOS12 breaks social, WSFed and OIDC logins #318
 	"https://github.com/aspnet/Announcements/issues/318",
-
 	// Microsoft Security Advisory ASPNETCore-July18: ASP.NET Core Denial Of Service Vulnerability
 	"https://github.com/aspnet/Announcements/issues/311",
-
 	// Microsoft Security Advisory ASPNETCore-Mar18: ASP.NET Core Denial Of Service Vulnerability
 	"https://github.com/aspnet/Announcements/issues/300",
+	// Microsoft Security Advisory CVE-2019-0815: ASP.NET Core denial of service vulnerability
+	// Strange module
+	"https://github.com/aspnet/Announcements/issues/352",
+	// Microsoft Security Advisory 4021279: Vulnerabilities in .NET Core, ASP.NET Core Could Allow Elevation of Privilege
+	// Duplicate of https://github.com/dotnet/announcements/issues/12
+	"https://github.com/aspnet/Announcements/issues/239",
+	// Microsoft Security Advisory CVE-2018-0808: ASP.NET Core Denial Of Service Vulnerability
+	// IIS vuln
+	"https://github.com/aspnet/Announcements/issues/294",
+	// Microsoft Security Advisory CVE-2019-0548: ASP.NET Core Denial Of Service Vulnerability
+	// IIS vuln
+	"https://github.com/aspnet/Announcements/issues/335",
+
+	// .NET Announcement Repo
 
 	// Microsoft Security Advisory CVE-2020-1597 | ASP.NET Core Denial of Service Vulnerability
 	// Duplicate
 	"https://github.com/dotnet/announcements/issues/162",
-
 	// Microsoft Security Advisory CVE-2018-8409: .NET Core Denial Of Service Vulnerability
 	// Duplicate
 	"https://github.com/dotnet/announcements/issues/83",
-
-	// Microsoft Security Advisory CVE-2019-0815: ASP.NET Core denial of service vulnerability
-	// Strange module
-	"https://github.com/aspnet/Announcements/issues/352",
-
 	// Microsoft Security Advisory CVE-2020-1108 | .NET Core Denial of Service Vulnerability
 	// Duplicate of "https://github.com/dotnet/announcements/issues/157"
 	"https://github.com/dotnet/announcements/issues/156",
-
-	// Microsoft Security Advisory 4021279: Vulnerabilities in .NET Core, ASP.NET Core Could Allow Elevation of Privilege
-	// Duplicate of https://github.com/dotnet/announcements/issues/12
-	"https://github.com/aspnet/Announcements/issues/239",
-
-	// Microsoft Security Advisory CVE-2018-0808: ASP.NET Core Denial Of Service Vulnerability
-	// IIS vuln
-	"https://github.com/aspnet/Announcements/issues/294",
-
-	// Microsoft Security Advisory CVE-2019-0548: ASP.NET Core Denial Of Service Vulnerability
-	// IIS vuln
-	"https://github.com/aspnet/Announcements/issues/335",
 }
 
 func main() {
@@ -72,15 +72,22 @@ func main() {
 
 	issueLinks := make(map[string]bool)
 	for _, repo := range repos {
-		issues, _, err := client.Issues.ListByRepo(context.Background(), repo.owner, repo.name, &github.IssueListByRepoOptions{
-			Labels: []string{"security"},
-			ListOptions: github.ListOptions{
-				Page:    0,
-				PerPage: 500,
-			},
-		})
-		if err != nil {
-			log.Fatalf("Could not fetch issues for %s/%s: %v", repo.owner, repo.name, err)
+		var issues []*github.Issue
+		for currPage := 0; true; currPage += pageSize {
+			pagedIssues, _, err := client.Issues.ListByRepo(context.Background(), repo.owner, repo.name, &github.IssueListByRepoOptions{
+				Labels: []string{"security"},
+				ListOptions: github.ListOptions{
+					Page:    currPage,
+					PerPage: pageSize,
+				},
+			})
+			if err != nil {
+				log.Fatalf("Could not fetch issues for %s/%s: %v", repo.owner, repo.name, err)
+			}
+			issues = append(issues, pagedIssues...)
+			if len(pagedIssues) != pageSize {
+				break
+			}
 		}
 
 		for _, issue := range issues {
@@ -103,15 +110,15 @@ func main() {
 			if err != nil {
 				return err
 			}
-			ff := &types.FileFormat{}
-			if err := yaml.Unmarshal(bytes, ff); err != nil {
-				log.Fatalf("could not parse yaml file %s: %v", info.Name(), err)
+			var cd types.CVEDefinition
+			if err := yaml.Unmarshal(bytes, &cd); err != nil {
+				return err
 			}
-			_, ok := issueLinks[ff.Link]
+			_, ok := issueLinks[cd.Link]
 			if !ok {
-				log.Fatalf("unknown link %v - %v", ff.Link, info.Name())
+				log.Fatalf("unknown link %v - %v", cd.Link, info.Name())
 			} else {
-				issueLinks[ff.Link] = false
+				issueLinks[cd.Link] = false
 			}
 		}
 		return nil
