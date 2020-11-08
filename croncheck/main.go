@@ -32,6 +32,9 @@ var repos = []repoReference{
 	},
 }
 
+// knownMissingLinks are links that exist in the github repos, but are not referred to by the YAML files
+// this can be due to duplicate CVE definitions between dotnet and aspnet, issues that don't have CVEs attributed
+// and advisories that are irrelevant
 var knownMissingLinks = []string{
 	// ASP.NET Announcement Repo
 
@@ -73,17 +76,19 @@ func main() {
 	issueLinks := make(map[string]bool)
 	for _, repo := range repos {
 		var issues []*github.Issue
-		for currPage := 0; true; currPage += pageSize {
+		var page int
+		for {
 			pagedIssues, _, err := client.Issues.ListByRepo(context.Background(), repo.owner, repo.name, &github.IssueListByRepoOptions{
 				Labels: []string{"security"},
 				ListOptions: github.ListOptions{
-					Page:    currPage,
+					Page:    page,
 					PerPage: pageSize,
 				},
 			})
 			if err != nil {
 				log.Fatalf("Could not fetch issues for %s/%s: %v", repo.owner, repo.name, err)
 			}
+			page++
 			issues = append(issues, pagedIssues...)
 			if len(pagedIssues) != pageSize {
 				break
@@ -106,7 +111,7 @@ func main() {
 			return err
 		}
 		if filepath.Ext(info.Name()) == ".yaml" {
-			bytes, err := ioutil.ReadFile(filepath.Join(root, info.Name()))
+			bytes, err := ioutil.ReadFile(path)
 			if err != nil {
 				return err
 			}
