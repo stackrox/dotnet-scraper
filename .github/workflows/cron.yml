@@ -28,4 +28,4 @@ jobs:
     - name: The job has failed
       if: ${{ failure() }}
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":".NET Scraper has failed. Please see https://github.com/stackrox/dotnet-scraper to resolve"}' ${{ secrets.SLACK_WEBHOOK }}
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"<!subteam^ST21FM29X|scanner-defs-oncall> .NET Scraper has failed. Please see https://github.com/stackrox/dotnet-scraper to resolve"}' ${{ secrets.SLACK_WEBHOOK }}
