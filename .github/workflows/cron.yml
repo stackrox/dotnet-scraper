@@ -19,8 +19,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get dependencies
-      run: |
-        go mod tidy
+      run: go mod tidy
 
     - name: Run croncheck
       run: go run croncheck/main.go
