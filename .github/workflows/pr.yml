@@ -1,4 +1,4 @@
-name: Go
+name: PR
 
 on:
   push:
@@ -30,3 +30,7 @@ jobs:
 
     - name: Run croncheck
       run: go run croncheck/main.go
+
+    - name: The job has failed
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":".NET Scraper has failed. Please see https://github.com/stackrox/dotnet-scraper to resolve"}' ${{ secrets.SLACK_WEBHOOK }}
