@@ -59,6 +59,9 @@ var knownMissingLinks = []string{
 	// Ignoring MSAs for now
 	"https://github.com/aspnet/Announcements/issues/203",
 	"https://github.com/aspnet/Announcements/issues/216",
+	// Affects .NET SDK
+	"https://github.com/aspnet/Announcements/issues/284",
+	"https://github.com/aspnet/Announcements/issues/285",
 
 	// .NET Announcement Repo
 
@@ -69,7 +72,7 @@ var knownMissingLinks = []string{
 	// Duplicate
 	"https://github.com/dotnet/announcements/issues/83",
 	// Microsoft Security Advisory CVE-2020-1108 | .NET Core Denial of Service Vulnerability
-	// Duplicate of "https://github.com/dotnet/announcements/issues/157"
+	// Duplicate of https://github.com/dotnet/announcements/issues/157
 	"https://github.com/dotnet/announcements/issues/156",
 }
 
