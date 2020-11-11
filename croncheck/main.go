@@ -66,10 +66,10 @@ var knownMissingLinks = []string{
 	// .NET Announcement Repo
 
 	// Microsoft Security Advisory CVE-2020-1597 | ASP.NET Core Denial of Service Vulnerability
-	// Duplicate
+	// Duplicate https://github.com/aspnet/Announcements/issues/431
 	"https://github.com/dotnet/announcements/issues/162",
 	// Microsoft Security Advisory CVE-2018-8409: .NET Core Denial Of Service Vulnerability
-	// Duplicate
+	// Duplicate https://github.com/aspnet/Announcements/issues/316
 	"https://github.com/dotnet/announcements/issues/83",
 	// Microsoft Security Advisory CVE-2020-1108 | .NET Core Denial of Service Vulnerability
 	// Duplicate of https://github.com/dotnet/announcements/issues/157
