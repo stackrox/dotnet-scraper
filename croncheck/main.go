@@ -56,6 +56,9 @@ var knownMissingLinks = []string{
 	// Microsoft Security Advisory CVE-2019-0548: ASP.NET Core Denial Of Service Vulnerability
 	// IIS vuln
 	"https://github.com/aspnet/Announcements/issues/335",
+	// Ignoring MSAs for now
+	"https://github.com/aspnet/Announcements/issues/203",
+	"https://github.com/aspnet/Announcements/issues/216",
 
 	// .NET Announcement Repo
 
