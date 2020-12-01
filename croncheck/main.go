@@ -63,6 +63,16 @@ var knownMissingLinks = []string{
 	"https://github.com/aspnet/Announcements/issues/284",
 	"https://github.com/aspnet/Announcements/issues/285",
 
+	// Affects MVC in version <2.1 (could not download 2.0 on Linux)
+	"https://github.com/aspnet/Announcements/issues/278",
+
+	// Affects MVC in version <2.1 (could not download 2.0 on Linux)
+	"https://github.com/aspnet/Announcements/issues/279",
+
+	// Affects MessagePack which is a non-runtime package
+	"https://github.com/aspnet/Announcements/issues/359",
+	"https://github.com/aspnet/Announcements/issues/405",
+
 	// .NET Announcement Repo
 
 	// Microsoft Security Advisory CVE-2020-1597 | ASP.NET Core Denial of Service Vulnerability
@@ -74,6 +84,12 @@ var knownMissingLinks = []string{
 	// Microsoft Security Advisory CVE-2020-1108 | .NET Core Denial of Service Vulnerability
 	// Duplicate of https://github.com/dotnet/announcements/issues/157
 	"https://github.com/dotnet/announcements/issues/156",
+
+	// Affects .NET 1
+	"https://github.com/dotnet/announcements/issues/12",
+
+	// Affects service model and not the core runtime
+	"https://github.com/dotnet/announcements/issues/73",
 }
 
 func main() {
