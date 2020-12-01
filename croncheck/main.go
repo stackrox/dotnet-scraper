@@ -63,13 +63,13 @@ var knownMissingLinks = []string{
 	"https://github.com/aspnet/Announcements/issues/284",
 	"https://github.com/aspnet/Announcements/issues/285",
 
-	// Affects MVC in runtime 1
+	// Affects MVC in version <2.1 (could not download 2.0 on Linux)
 	"https://github.com/aspnet/Announcements/issues/278",
 
-	// Affects MVC in runtime 1
+	// Affects MVC in version <2.1 (could not download 2.0 on Linux)
 	"https://github.com/aspnet/Announcements/issues/279",
 
-	// Affects MessagePack which is a non-core package
+	// Affects MessagePack which is a non-runtime package
 	"https://github.com/aspnet/Announcements/issues/359",
 	"https://github.com/aspnet/Announcements/issues/405",
 
