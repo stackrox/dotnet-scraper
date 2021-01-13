@@ -73,6 +73,9 @@ var knownMissingLinks = []string{
 	"https://github.com/aspnet/Announcements/issues/359",
 	"https://github.com/aspnet/Announcements/issues/405",
 
+	// TODO: Add CVE-2021-1723
+	"https://github.com/aspnet/Announcements/issues/449",
+
 	// .NET Announcement Repo
 
 	// Microsoft Security Advisory CVE-2020-1597 | ASP.NET Core Denial of Service Vulnerability
@@ -90,6 +93,9 @@ var knownMissingLinks = []string{
 
 	// Affects service model and not the core runtime
 	"https://github.com/dotnet/announcements/issues/73",
+
+	// Duplicate of https://github.com/aspnet/Announcements/issues/449
+	"https://github.com/dotnet/announcements/issues/170",
 }
 
 func main() {
