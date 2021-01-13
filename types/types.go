@@ -10,4 +10,6 @@ type CVEDefinition struct {
 	ID               string                                `json:"id"`
 	Link             string                                `json:"link"`
 	AffectedPackages []*schema.NVDCVEFeedJSON10DefCPEMatch `json:"affectedPackages"`
+	Description      string                                `json:"description"`
+	Impact           *schema.NVDCVEFeedJSON10DefImpact     `json:"impact"`
 }
