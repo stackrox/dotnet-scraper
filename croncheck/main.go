@@ -73,9 +73,6 @@ var knownMissingLinks = []string{
 	"https://github.com/aspnet/Announcements/issues/359",
 	"https://github.com/aspnet/Announcements/issues/405",
 
-	// TODO: Add CVE-2021-1723
-	"https://github.com/aspnet/Announcements/issues/449",
-
 	// .NET Announcement Repo
 
 	// Microsoft Security Advisory CVE-2020-1597 | ASP.NET Core Denial of Service Vulnerability
