@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/ghodss/yaml"
@@ -19,6 +20,10 @@ type repoReference struct {
 
 const (
 	pageSize = 20
+)
+
+var (
+	cveRegex = regexp.MustCompile(`CVE-\d{4}-\d{4,7}`)
 )
 
 var repos = []repoReference{
@@ -95,10 +100,15 @@ var knownMissingLinks = []string{
 	"https://github.com/dotnet/announcements/issues/170",
 }
 
+type linkRef struct {
+	stillNeeded bool
+	cve         string
+}
+
 func main() {
 	client := github.NewClient(nil)
 
-	issueLinks := make(map[string]bool)
+	issueLinks := make(map[string]*linkRef)
 	for _, repo := range repos {
 		var issues []*github.Issue
 		var page int
@@ -125,8 +135,16 @@ func main() {
 			if !strings.HasPrefix(title, "Microsoft Security Advisory") {
 				continue
 			}
+			var cve string
+			if cveMatches := cveRegex.FindStringSubmatch(title); len(cveMatches) > 0 {
+				cve = cveMatches[0]
+			}
+
 			link := strings.ReplaceAll(issue.GetURL(), "api.github.com/repos", "github.com")
-			issueLinks[link] = true
+			issueLinks[link] = &linkRef{
+				stillNeeded: true,
+				cve:         cve,
+			}
 		}
 	}
 
@@ -148,7 +166,7 @@ func main() {
 			if !ok {
 				log.Fatalf("unknown link %v - %v", cd.Link, info.Name())
 			} else {
-				issueLinks[cd.Link] = false
+				issueLinks[cd.Link].stillNeeded = false
 			}
 		}
 		return nil
@@ -161,10 +179,24 @@ func main() {
 	for _, knownMissing := range knownMissingLinks {
 		delete(issueLinks, knownMissing)
 	}
+
+	// Iterate over missing issue links and see if CVE is valid
+	for link, linkRef := range issueLinks {
+		if linkRef.stillNeeded && linkRef.cve != "" {
+			valid, err := validateNVDCVEIsEvaluated(linkRef.cve)
+			if err != nil {
+				log.Fatal(err.Error())
+			}
+			if !valid {
+				delete(issueLinks, link)
+			}
+		}
+	}
+
 	if len(issueLinks) > 0 {
 		fail := false
-		for link, val := range issueLinks {
-			if val {
+		for link, linkRef := range issueLinks {
+			if linkRef.stillNeeded {
 				fail = true
 				log.Printf("Unaccounted for issue: %v", link)
 			}
