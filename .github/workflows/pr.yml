@@ -25,4 +25,4 @@ jobs:
       run: go test -v ./...
 
     - name: Run croncheck
-      run: go run croncheck/main.go
+      run: go run croncheck/*
