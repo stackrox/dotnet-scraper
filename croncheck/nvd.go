@@ -34,7 +34,7 @@ func validateNVDCVEIsEvaluated(cve string) (bool, error) {
 	if err := json.Unmarshal(data, &result); err != nil {
 		return false, err
 	}
-	// CVE not stillNeeded
+	// CVE not found
 	if len(result.CVEItems) == 0 {
 		return false, nil
 	}
