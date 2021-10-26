@@ -98,6 +98,9 @@ var knownMissingLinks = []string{
 
 	// Duplicate of https://github.com/aspnet/Announcements/issues/449
 	"https://github.com/dotnet/announcements/issues/170",
+
+	// Affects System.DirectoryServices.Protocols, which is not generically fixed by upgrading .NET core
+	"https://github.com/dotnet/announcements/issues/202"
 }
 
 type linkRef struct {
