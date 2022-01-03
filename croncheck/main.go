@@ -101,6 +101,9 @@ var knownMissingLinks = []string{
 
 	// Affects System.DirectoryServices.Protocols, which is not generically fixed by upgrading .NET core
 	"https://github.com/dotnet/announcements/issues/202",
+
+	// Vulnerability only affects IIS hosted applications which is not available on Linux
+	"https://github.com/dotnet/announcements/issues/206",
 }
 
 type linkRef struct {
