@@ -104,6 +104,9 @@ var knownMissingLinks = []string{
 
 	// Vulnerability only affects IIS hosted applications which is not available on Linux
 	"https://github.com/dotnet/announcements/issues/206",
+
+	// Vulnerability only affects NuGet packages
+	"https://github.com/dotnet/announcements/issues/239",
 }
 
 type linkRef struct {
