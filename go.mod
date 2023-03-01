@@ -1,12 +1,24 @@
 module github.com/stackrox/dotnet-scraper
 
-go 1.14
+go 1.19
 
 require (
-	github.com/facebookincubator/nvdtools v0.1.4-0.20191024132624-1cb041402875
+	github.com/facebookincubator/nvdtools v0.1.5
 	github.com/ghodss/yaml v1.0.0
-	github.com/google/go-github/v32 v32.1.0
-	github.com/stretchr/testify v1.6.1
-	gopkg.in/yaml.v2 v2.3.0 // indirect
+	github.com/google/go-github/v50 v50.1.0
+	github.com/stretchr/testify v1.8.2
+)
 
+require (
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
+	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
+	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/protobuf v1.27.1 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
