@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -160,7 +159,7 @@ func main() {
 			return err
 		}
 		if filepath.Ext(info.Name()) == ".yaml" {
-			bytes, err := ioutil.ReadFile(path)
+			bytes, err := os.ReadFile(path)
 			if err != nil {
 				return err
 			}

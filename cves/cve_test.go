@@ -1,7 +1,7 @@
 package cves
 
 import (
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -12,14 +12,14 @@ import (
 )
 
 func TestParseYAMLs(t *testing.T) {
-	files, err := ioutil.ReadDir(".")
+	files, err := os.ReadDir(".")
 	require.NoError(t, err)
 
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".yaml" {
 			continue
 		}
-		data, err := ioutil.ReadFile(f.Name())
+		data, err := os.ReadFile(f.Name())
 		assert.NoError(t, err)
 
 		var cd types.CVEDefinition
