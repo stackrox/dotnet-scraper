@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -10,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/ghodss/yaml"
-	"github.com/google/go-github/v32/github"
+	"github.com/google/go-github/v50/github"
 	"github.com/stackrox/dotnet-scraper/types"
 )
 
@@ -163,7 +162,7 @@ func main() {
 			return err
 		}
 		if filepath.Ext(info.Name()) == ".yaml" {
-			bytes, err := ioutil.ReadFile(path)
+			bytes, err := os.ReadFile(path)
 			if err != nil {
 				return err
 			}
