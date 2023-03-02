@@ -26,7 +26,3 @@ jobs:
 
     - name: Run croncheck
       run: go run croncheck/*
-
-    - name: TEST
-      run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"<!subteam^S04S96AAVND|acs-scanner-primary> .NET Scraper has failed. Please see https://github.com/stackrox/dotnet-scraper to resolve"}' ${{ secrets.SLACK_WEBHOOK }}
