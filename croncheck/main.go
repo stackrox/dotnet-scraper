@@ -109,6 +109,9 @@ var knownMissingLinks = []string{
 
 	// Vulnerability only affects NuGet packages
 	"https://github.com/dotnet/announcements/issues/239",
+
+	// Duplicate of https://github.com/dotnet/announcements/issues/250
+	"https://github.com/dotnet/announcements/issues/258",
 }
 
 type linkRef struct {
