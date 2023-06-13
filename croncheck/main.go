@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -168,7 +169,7 @@ func main() {
 			}
 			var cd types.CVEDefinition
 			if err := yaml.Unmarshal(bytes, &cd); err != nil {
-				return err
+				return fmt.Errorf("unmarshalling %s: %w", info.Name(), err)
 			}
 			_, ok := issueLinks[cd.Link]
 			if !ok {
@@ -193,7 +194,7 @@ func main() {
 		if linkRef.stillNeeded && linkRef.cve != "" {
 			valid, err := validateNVDCVEIsEvaluated(linkRef.cve)
 			if err != nil {
-				log.Fatal(err.Error())
+				log.Fatalf("could not validate NVD CVE %s: %v", linkRef.cve, err)
 			}
 			if !valid {
 				delete(issueLinks, link)
