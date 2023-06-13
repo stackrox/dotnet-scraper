@@ -2,15 +2,18 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/ghodss/yaml"
 	"github.com/google/go-github/v50/github"
 	"github.com/stackrox/dotnet-scraper/types"
+	"golang.org/x/time/rate"
 )
 
 type repoReference struct {
@@ -168,7 +171,7 @@ func main() {
 			}
 			var cd types.CVEDefinition
 			if err := yaml.Unmarshal(bytes, &cd); err != nil {
-				return err
+				return fmt.Errorf("unmarshalling %s: %w", info.Name(), err)
 			}
 			_, ok := issueLinks[cd.Link]
 			if !ok {
@@ -188,12 +191,21 @@ func main() {
 		delete(issueLinks, knownMissing)
 	}
 
+	// NVD API rate limits requests to 5 per 30-second window.
+	// See https://nvd.nist.gov/developers/start-here for more
+	// information.
+	l := rate.NewLimiter(rate.Every(6*time.Second), 1)
+
 	// Iterate over missing issue links and see if CVE is valid
 	for link, linkRef := range issueLinks {
+		err := l.Wait(context.Background())
+		if err != nil {
+			log.Fatalf("waiting for rate limit: %v", err)
+		}
 		if linkRef.stillNeeded && linkRef.cve != "" {
 			valid, err := validateNVDCVEIsEvaluated(linkRef.cve)
 			if err != nil {
-				log.Fatal(err.Error())
+				log.Fatalf("could not validate NVD CVE %s: %v", linkRef.cve, err)
 			}
 			if !valid {
 				delete(issueLinks, link)

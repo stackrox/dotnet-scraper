@@ -7,6 +7,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/google/go-github/v50 v50.1.0
 	github.com/stretchr/testify v1.8.2
+	golang.org/x/time v0.3.0
 )
 
 require (

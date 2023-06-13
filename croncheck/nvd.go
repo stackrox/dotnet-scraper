@@ -23,7 +23,7 @@ func validateNVDCVEIsEvaluated(cve string) (bool, error) {
 		return false, err
 	}
 	if err := json.Unmarshal(data, &respMap); err != nil {
-		return false, err
+		return false, fmt.Errorf("unmarshalling NVD response body: %w", err)
 	}
 	data, err = json.Marshal(respMap["result"])
 	if err != nil {
@@ -32,7 +32,7 @@ func validateNVDCVEIsEvaluated(cve string) (bool, error) {
 
 	var result schema.NVDCVEFeedJSON10
 	if err := json.Unmarshal(data, &result); err != nil {
-		return false, err
+		return false, fmt.Errorf("unmarshalling NVD response result: %w", err)
 	}
 	// CVE not found
 	if len(result.CVEItems) == 0 {
