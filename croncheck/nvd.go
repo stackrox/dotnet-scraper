@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 
 	"github.com/facebookincubator/nvdtools/cvefeed/nvd/schema"
@@ -23,7 +22,6 @@ func validateNVDCVEIsEvaluated(cve string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	log.Println(string(data))
 	if err := json.Unmarshal(data, &respMap); err != nil {
 		return false, fmt.Errorf("unmarshalling NVD response body: %w", err)
 	}
