@@ -112,6 +112,15 @@ var knownMissingLinks = []string{
 
 	// Duplicate of https://github.com/dotnet/announcements/issues/250
 	"https://github.com/dotnet/announcements/issues/258",
+
+	// Duplicate of https://github.com/dotnet/announcements/issues/282
+	"https://github.com/dotnet/announcements/issues/277",
+
+	// Duplicate of https://github.com/dotnet/announcements/issues/281
+	"https://github.com/dotnet/announcements/issues/278",
+
+	// Duplicate of https://github.com/dotnet/announcements/issues/280
+	"https://github.com/dotnet/announcements/issues/279",
 }
 
 type linkRef struct {
