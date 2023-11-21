@@ -121,6 +121,11 @@ var knownMissingLinks = []string{
 
 	// Duplicate of https://github.com/dotnet/announcements/issues/280
 	"https://github.com/dotnet/announcements/issues/279",
+
+	// Only affects release candidates for .NET 8.0, ACS Scanner's analyzer currently
+	// ignores release candidate versions.  More info here:
+	// https://github.com/stackrox/scanner/blob/0811d631da3eb0f7bb0893d62859629a484ac023/pkg/analyzer/dotnetcoreruntime/analyzer.go#L28
+	"https://github.com/dotnet/announcements/issues/286",
 }
 
 type linkRef struct {
