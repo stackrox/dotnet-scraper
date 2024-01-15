@@ -5,12 +5,31 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 
 	"github.com/facebookincubator/nvdtools/cvefeed/nvd/schema"
 )
 
+// baseURL is NVD's endpoint base URL.
+var baseURL *url.URL
+
+func init() {
+    var err error
+    baseURL, err = url.Parse("https://services.nvd.nist.gov/rest/json/cves/2.0")
+    if err != nil {
+        panic(err)
+    }
+}
+
+
 func validateNVDCVEIsEvaluated(cve string) (bool, error) {
-	resp, err := http.Get(fmt.Sprintf("https://services.nvd.nist.gov/rest/json/cve/1.0/%s", cve))
+	// Create a copy of the baseURL and update its query parameters.
+	q := baseURL.Query()
+	q.Set("cveId", cve)
+	u := *baseURL
+	u.RawQuery = q.Encode()
+
+	resp, err := http.Get(u.String())
 	if err != nil {
 		return false, err
 	}
