@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/ghodss/yaml"
-	"github.com/google/go-github/v50/github"
+	"github.com/google/go-github/v68/github"
 	"github.com/stackrox/dotnet-scraper/types"
 	"golang.org/x/time/rate"
 )
