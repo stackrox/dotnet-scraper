@@ -213,7 +213,7 @@ func main() {
 	// information.
 	interval := 6 * time.Second // 5 per 30 seconds
 	if _, found := os.LookupEnv("NVD_API_KEY"); found {
-		interval = 50 / 30 * time.Second // 50 requests per 30 seconds
+		interval = 50 / 30 * time.Second // 50 per 30 seconds
 	}
 	log.Printf("Limiting NVD API requests to 1 every: %s", interval)
 
