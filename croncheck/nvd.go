@@ -39,7 +39,6 @@ func validateNVDCVEIsEvaluated(cve string) (bool, error) {
 	}
 
 	client := &http.Client{}
-	// resp, err := http.Get(u.String())
 	resp, err := client.Do(req)
 	if err != nil {
 		return false, err
