@@ -208,13 +208,7 @@ func main() {
 		delete(issueLinks, knownMissing)
 	}
 
-	// NVD API rate limits requests to 5 per 30-second window.
-	// See https://nvd.nist.gov/developers/start-here for more
-	// information.
-	interval := 6 * time.Second // 5 per 30 seconds
-	if _, found := os.LookupEnv("NVD_API_KEY"); found {
-		interval = 50 / 30 * time.Second // 50 per 30 seconds
-	}
+	interval := rateLimitInterval()
 	log.Printf("Limiting NVD API requests to 1 every: %s", interval)
 
 	l := rate.NewLimiter(rate.Every(interval), 1)
@@ -248,4 +242,16 @@ func main() {
 			log.Fatalf("Failing with non 0 exit code")
 		}
 	}
+}
+
+// NVD API rate limits requests to 5 per 30-second window without an API
+// key or 50 per 30-second window with an API key.
+// See https://nvd.nist.gov/developers/start-here for more information.
+func rateLimitInterval() time.Duration {
+	window := 30 * time.Second
+	if _, found := os.LookupEnv("NVD_API_KEY"); found {
+		return window / 50 // 50 per 30 seconds (one request per 600ms)
+	}
+
+	return window / 5 // 5 per 30 seconds (one req per 6s)
 }
