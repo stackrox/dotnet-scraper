@@ -7,12 +7,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRateLimitIntervale(t *testing.T) {
-
+func TestNVDRateLimitInterval(t *testing.T) {
 	t.Run("With NVD API key", func(t *testing.T) {
 		t.Setenv("NVD_API_KEY", "SOMETHING")
 
-		interval := rateLimitInterval()
+		interval := nvdRateLimitInterval()
 
 		// 50 per 30 seconds
 		assert.Equal(t, 30*time.Second, (interval * 50))
@@ -20,11 +19,10 @@ func TestRateLimitIntervale(t *testing.T) {
 	})
 
 	t.Run("Without NVD API key", func(t *testing.T) {
-		interval := rateLimitInterval()
+		interval := nvdRateLimitInterval()
 
 		// 5 per 30 seconds
 		assert.Equal(t, 30*time.Second, (interval * 5))
 		assert.Equal(t, 6*time.Second, interval)
 	})
-
 }

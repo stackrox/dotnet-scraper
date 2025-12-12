@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"time"
 
 	"github.com/facebookincubator/nvdtools/cveapi/nvd/schema"
 )
@@ -86,4 +87,17 @@ func validateNVDCVEIsEvaluated(cve string) (bool, error) {
 	}
 
 	return false, nil
+}
+
+// nvdRateLimitInterval returns an interval to limit rate of requests
+// to the NVD API. NVD allows 50 requests per 30-second window
+// with an API key or 5 per 30 seconds without an API key.
+// See https://nvd.nist.gov/developers/start-here for more information.
+func nvdRateLimitInterval() time.Duration {
+	window := 30 * time.Second
+	if _, found := os.LookupEnv("NVD_API_KEY"); found {
+		return window / 50 // 50 per 30 seconds (one request per 600ms)
+	}
+
+	return window / 5 // 5 per 30 seconds (one req per 6s)
 }
