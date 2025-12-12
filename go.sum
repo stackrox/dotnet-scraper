@@ -106,8 +106,6 @@ github.com/envoyproxy/go-control-plane v0.10.1/go.mod h1:AY7fTTXNdv/aJ2O5jwpxAPO
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
 github.com/envoyproxy/protoc-gen-validate v0.6.2/go.mod h1:2t7qjJNvHPx8IjnBOzl9E9/baC+qXE/TeeyBRzgJDws=
 github.com/facebookincubator/flog v0.0.0-20190930132826-d2511d0ce33c/go.mod h1:QGzNH9ujQ2ZUr/CjDGZGWeDAVStrWNjHeEcjJL96Nuk=
-github.com/facebookincubator/nvdtools v0.1.5 h1:jbmDT1nd6+k+rlvKhnkgMokrCAzHoASWE5LtHbX2qFQ=
-github.com/facebookincubator/nvdtools v0.1.5/go.mod h1:Kh55SAWnjckS96TBSrXI99KrEKH4iB0OJby3N8GRJO4=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/fatih/color v1.9.0/go.mod h1:eQcE1qtQxscV5RaZvpXrrb8Drkc3/DdQ+uUYCNjL+zU=
 github.com/fatih/color v1.13.0/go.mod h1:kLAiJbzzSOZDVNGyDpeOxJ47H46qBXwg5ILebYFFOfk=
@@ -325,6 +323,8 @@ github.com/spf13/cobra v1.3.0/go.mod h1:BrRVncBjOJa/eUcVVm9CE+oC6as8k+VYr4NY7WCi
 github.com/spf13/jwalterweatherman v1.1.0/go.mod h1:aNWZUN0dPAAO/Ljvb5BEdw96iTZ0EXowPYD95IqWIGo=
 github.com/spf13/pflag v1.0.5/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
 github.com/spf13/viper v1.10.0/go.mod h1:SoyBPwAtKDzypXNDFKN5kzH7ppppbGZtls1UpIy5AsM=
+github.com/stackrox/nvdtools v0.0.0-20231111002313-57e262e4797e h1:hLHHK1pGLpRvEbER2cJZekLeMnL+nMn3C37CVUhameM=
+github.com/stackrox/nvdtools v0.0.0-20231111002313-57e262e4797e/go.mod h1:Kh55SAWnjckS96TBSrXI99KrEKH4iB0OJby3N8GRJO4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=

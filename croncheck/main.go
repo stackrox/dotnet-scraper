@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"time"
 
 	"github.com/ghodss/yaml"
 	"github.com/google/go-github/v68/github"
@@ -208,18 +207,18 @@ func main() {
 		delete(issueLinks, knownMissing)
 	}
 
-	// NVD API rate limits requests to 5 per 30-second window.
-	// See https://nvd.nist.gov/developers/start-here for more
-	// information.
-	l := rate.NewLimiter(rate.Every(6*time.Second), 1)
+	interval := nvdRateLimitInterval()
+	log.Printf("Limiting NVD API requests to 1 every: %s", interval)
+
+	l := rate.NewLimiter(rate.Every(interval), 1)
 
 	// Iterate over missing issue links and see if CVE is valid
 	for link, linkRef := range issueLinks {
-		err := l.Wait(context.Background())
-		if err != nil {
-			log.Fatalf("waiting for rate limit: %v", err)
-		}
 		if linkRef.stillNeeded && linkRef.cve != "" {
+			err := l.Wait(context.Background())
+			if err != nil {
+				log.Fatalf("waiting for rate limit: %v", err)
+			}
 			valid, err := validateNVDCVEIsEvaluated(linkRef.cve)
 			if err != nil {
 				log.Fatalf("could not validate NVD CVE %s: %v", linkRef.cve, err)
