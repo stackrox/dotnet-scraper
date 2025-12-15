@@ -25,4 +25,6 @@ jobs:
       run: go test -v ./...
 
     - name: Run croncheck
+      env:
+        NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
       run: go run ./croncheck
