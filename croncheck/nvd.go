@@ -51,6 +51,10 @@ func validateNVDCVEIsEvaluated(cve string) (bool, error) {
 		return false, err
 	}
 
+	if resp.StatusCode != http.StatusOK {
+		return false, fmt.Errorf("NVD API returned status %d (%s): %q", resp.StatusCode, http.StatusText(resp.StatusCode), string(data))
+	}
+
 	var result schema.CVEAPIJSON20
 	if err := json.Unmarshal(data, &result); err != nil {
 		return false, fmt.Errorf("unmarshalling NVD response result: %w", err)
